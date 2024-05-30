@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
  root 'posts#index'
- resources :posts
+ resources :posts do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+ end
+
  resources :users, only: [:index, :destroy]
  
  get "edit_password" ,to: "passwords#edit"

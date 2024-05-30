@@ -1,8 +1,23 @@
-<div class="card">
-    <div class="card-body">
-        <h1><%= @post.title %></h1>
-        <div class="body"><%= @post.content %></div>
+<h1><%= @post.title %></h1>
+<p><%= @post.content %></p>
 
-        </div>
+<h2>Comments</h2>
+<%= form_with(model: [@post, Comment.new], local: true) do |form| %>
+  <%= form.text_area :content, class: 'form-control', placeholder: 'Write your comment here...' %>
+  <%= form.submit 'Submit', class: 'btn btn-primary mt-2' %>
+<% end %>
+
+<% @post.comments.each do |comment| %>
+  <div class="card mt-2">
+    <div class="card-body">
+      <p><%= comment.content %> - <%= comment.user.email %></p>
+      
+      <% if comment.user == Current.user %>
+        <%= link_to 'Edit', edit_post_comment_path(@post, comment), class: 'btn btn-secondary' %>
+        <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <% elsif Current.user.admin? || @post.user == Current.user %>
+        <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <% end %>
     </div>
-</div>
+  </div>
+<% end %>

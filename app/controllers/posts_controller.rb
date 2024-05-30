@@ -9,12 +9,13 @@ class PostsController < ApplicationController
     @myPosts = if Current.user.role == 'admin' || Current.user.role == 'author'
                     Post.where(user: Current.user)
                end
-    # @authors = if Current.user.role == 'admin' 
-    #               User.where(role: 'author')
-    #           end
+    @comment_field = false
+   
   end
 
   def show
+    @post = Post.find(params[:id])
+    @comments = @post.comments
   end
 
   def new

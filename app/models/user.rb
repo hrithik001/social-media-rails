@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
     #associations
     has_many :posts,dependent: :destroy
+    has_many :comments, dependent: :destroy
 
     private
 

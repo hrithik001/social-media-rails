@@ -17,14 +17,15 @@
         <% if Current.user.admin? || post.user == Current.user %>
           <%= link_to 'Edit', edit_post_path(post) ,class:'btn btn-secondary'%>
           <%= button_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-danger mt-2'%>
+       
         <% end %>
+
       </div>
      
       </div>
     </div>
-      
-      
-      
-    
+   
   <% end %>
+
+ 
 
