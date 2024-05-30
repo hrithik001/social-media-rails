@@ -6,7 +6,7 @@ class RegistrationsController < ApplicationController
         @user = User.new(user_params)
         if @user.save
           session_id = SecureRandom.uuid
-          @user_active_session = ActiveSession.new(user_id: @user.id, session_id: session_id, session_expiry: 15.minutes.from_now, status: "active")
+          @user_active_session = ActiveSession.new(user_id: @user.id, session_id: session_id, session_expiry: 15.minutes.from_now, session_status: true)
           @user_active_session.save
           session[:user_session_id] = session_id
           redirect_to root_path, notice: "#{@user.role} is created successfully!!"

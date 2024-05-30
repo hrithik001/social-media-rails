@@ -1,0 +1,17 @@
+<% if @posts.length == 0 %>
+  <h1>No post added form <%= @author_username %></h1>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class="card mt-3">
+      <div class="card-body">
+        <h3><%= post.title %></h3>
+        <p><%= post.content %></p>
+        <%= link_to 'Show', post ,class:'btn btn-secondary'%>
+       
+        <%= button_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-danger mt-2'%>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= link_to 'Back to Authors', authors_path ,class:'btn btn-secondary mt-3'%>

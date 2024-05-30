@@ -1,12 +1,25 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
    
-    <%= link_to "Navbar" , root_path ,class:"navbar-brand ms-3"%>
+    <%= link_to "All Posts" , root_path ,class:"navbar-brand ms-3"%>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        
+        <% if Current.user %>
+          <% if Current.user.role == 'admin' %>
+            <li class="nav-item active">
+                <%=  link_to "Creater's",authors_path ,class:'nav-link'%> 
+            </li>
+          <% elsif Current.user.role == 'author' %>
+            <li class="nav-item active disabled">
+              <%=  link_to "My posts",root_path ,class:'nav-link'%> 
+            </li>
+          <% end %>
+          <% end %>
+        
      
        
 
