@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :user_logged_in?
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, only: [:edit, :update, :destroy]
+  # before_action :authenticate_user
 
   def index
     @posts = Post.all

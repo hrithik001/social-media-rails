@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
     before_action :set_current_user
     before_action :check_session_timeout
     
+    
     def set_current_user
         if session[:user_session_id]
             # Current.user = User.find_by(id:  )
@@ -29,5 +30,10 @@ class ApplicationController < ActionController::Base
           end
         end
       end
+    def authenticate_user!
+    unless Current.user
+        redirect_to sign_in_path, alert: "You must be logged in to access this page."
+    end
+    end
 
 end
