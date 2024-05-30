@@ -14,8 +14,8 @@
                 <%=  link_to "Creater's",authors_path ,class:'nav-link'%> 
             </li>
           <% elsif Current.user.role == 'author' %>
-            <li class="nav-item active disabled">
-              <%=  link_to "My posts",root_path ,class:'nav-link'%> 
+            <li class="nav-item active ">
+              <%=  link_to "My posts",authors_post_path(Current.user.id) ,class:'nav-link'%> 
             </li>
           <% end %>
           <% end %>
