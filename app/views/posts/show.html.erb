@@ -14,9 +14,9 @@
       
       <% if comment.user == Current.user %>
         <%= link_to 'Edit', edit_post_comment_path(@post, comment), class: 'btn btn-secondary' %>
-        <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mt-2' %>
       <% elsif Current.user.admin? || @post.user == Current.user %>
-        <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mt-2' %>
       <% end %>
     </div>
   </div>

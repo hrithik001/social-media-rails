@@ -10,7 +10,8 @@ class CommentsController < ApplicationController
       if @comment.save
         redirect_to @post, notice: 'Comment was successfully created.'
       else
-        redirect_to @post, alert: 'Error creating comment.'
+        flash[:alert] = @comment.errors.full_messages.to_sentence
+        redirect_to @post
       end
     end
   

@@ -2,10 +2,10 @@
 
 <%= form_with(model: [@post, @comment], local: true) do |form| %>
   <div class="form-group">
-    <%= form.label :content %>
-    <%= form.text_area :content, class: 'form-control' %>
+    <!-- <%= form.label :content %> -->
+    <%= form.text_area :content, class: 'form-control' ,placeholder:'Comments here ....' %>
   </div>
-  <%= form.submit 'Update Comment', class: 'btn btn-primary' %>
+  <%= form.submit 'Update Comment', class: 'btn btn-primary mt-2' %>
 <% end %>
 
-<%= link_to 'Back', @post, class: 'btn btn-secondary' %>
+<%= link_to 'Back', @post, class: 'btn btn-secondary mt-2' %>

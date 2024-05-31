@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
             # Current.user = User.find_by(id:  )
             if ActiveSession.where(session_id: session[:user_session_id],session_status: true).exists?
                 Current.user ||= User.find(ActiveSession.find_by(session_id: session[:user_session_id],session_status: true).user_id)
-                flash[:notice] = "#{Current.user.inspect}"
+                # flash[:notice] = "#{Current.user.inspect}"
             else
                 session[:user_session_id] = nil
                 Current.user = nil
