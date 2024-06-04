@@ -8,7 +8,7 @@
 
 
   <% @posts.each do |post| %>
-    <div class="card mt-3 ">
+    <div class="card mb-3">
       <div class="card-body d-flex align-item-between justify-content-between">
         <div class="mr-auto"><b><%= post.title %></b></div>
         <div class="">
@@ -24,8 +24,18 @@
      
       </div>
     </div>
-   
-  <% end %>
+
+    
+    <% end %>
+    
+    <% if @page > 0 %>
+    <%= link_to "Previous Page", posts_path(page: @page-1) ,class: 'btn btn-secondary' %>
+   <% end %>
+    <% if @posts.size >= POST_PER_PAGE %>
+     <%= link_to "Next Page", posts_path(page: @page+1) ,class: 'btn btn-secondary'  %>
+    <% end %>
+
+
 
  
 

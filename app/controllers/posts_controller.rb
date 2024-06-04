@@ -2,10 +2,12 @@ class PostsController < ApplicationController
   before_action :user_logged_in?
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, only: [:edit, :update, :destroy]
-  # before_action :authenticate_user
+ 
 
   def index
-    @posts = Post.all
+
+    @page = params.fetch(:page,0).to_i
+    @posts = Post.all.offset(@page * POST_PER_PAGE).limit(POST_PER_PAGE)
     @myPosts = if Current.user.role == 'admin' || Current.user.role == 'author'
                     Post.where(user: Current.user)
                end
