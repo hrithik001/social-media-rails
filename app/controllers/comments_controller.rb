@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
         redirect_to @post, notice: 'Comment was successfully created.'
       else
         flash[:alert] = @comment.errors.full_messages.to_sentence
+        flash[:model_errors] =  @comment.errors.full_messages_for(:base).to_sentence 
         redirect_to @post
       end
     end
@@ -22,6 +23,7 @@ class CommentsController < ApplicationController
       if @comment.update(comment_params)
         redirect_to @post, notice: 'Comment was successfully updated.'
       else
+        flash[:model_errors] =  @comment.errors.full_messages_for(:base).to_sentence 
         render :edit
       end
     end
@@ -42,11 +44,12 @@ class CommentsController < ApplicationController
     end
   
     def comment_params
-      params.require(:comment).permit(:content)
+      params.require(:comment).permit(:content, :post_id, :parent_id)
     end
   
     def authorize_comment!
       unless can_manage_comment?
+        flash[:model_errors] =  @comment.errors.full_messages_for(:base).to_sentence 
         redirect_to @post, alert: 'You do not have permission to perform this action.'
       end
     end

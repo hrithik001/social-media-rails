@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_30_090112) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_042932) do
   create_table "active_sessions", force: :cascade do |t|
     t.string "session_id"
     t.integer "user_id", null: false
@@ -27,6 +27,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_090112) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end

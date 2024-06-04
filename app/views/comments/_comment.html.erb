@@ -1,0 +1,31 @@
+<div class="comment mt-3">
+    <div class="card-body">
+      
+        <p><strong>|--  <%= comment.user.email %></strong> : <%= comment.content %></p>
+        
+        <div class="comment-actions">
+          <% if comment.user == Current.user %>
+            <%= link_to 'Edit', edit_post_comment_path(comment.post, comment), class: 'btn btn-secondary mb-2' %>
+            <%= button_to 'Delete', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% elsif Current.user == 'admin' || comment.post.user == Current.user %>
+            <%= button_to 'Delete', post_comment_path(comment.post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
+        </div>
+  
+        <div class="reply-form mt-2">
+          <%= form_with(model: [comment.post, Comment.new], local: true) do |form| %>
+            <%= form.hidden_field :parent_id, value: comment.id %>
+            <div class="form-group">
+              <%= form.text_area :content, class: 'form-control', placeholder: 'Add a public reply...' %>
+            </div>
+            <%= form.submit 'Reply', class: 'btn btn-primary mt-2' %>
+          <% end %>
+        </div>
+  
+        <div class="replies ml-4 mt-2">
+          <%= render partial: 'comments/comment', collection: comment.replies, as: :comment %>
+        </div>
+      
+    </div>
+  </div>
+  
